@@ -4,10 +4,24 @@ import './Color.css'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 export default class Color extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: '',
+      copied: false,
+    }
+    this.handleCopy = this.handleCopy.bind(this)
+  }
+  handleCopy() {
+    this.setState({ copied: true })
+    setTimeout(() => {
+      this.setState({ copied: false })
+    }, 1000)
+  }
   render() {
     return (
       <div
-        className="Color"
+        className={`Color ${this.state.copied}`}
         style={{
           background: this.props.backgroundColor.color,
           width: '20%',
@@ -16,21 +30,18 @@ export default class Color extends Component {
           padding: '0.1rem',
         }}
       >
-        <span
-          style={{
-            alignSelf: 'flex-end',
-            justifySelf: 'start',
-            overflow: 'hidden',
-          }}
-        >
+        <span className="ColorName">
           {this.props.backgroundColor.name.toUpperCase()}
         </span>
         <div style={{ alignSelf: 'center', justifySelf: 'center' }}>
-          <CopyToClipboard text={this.props.backgroundColor.color}>
+          <CopyToClipboard
+            text={this.props.backgroundColor.color}
+            onCopy={this.handleCopy}
+          >
             <button className="copyBtn btn btn-light">Copy</button>
           </CopyToClipboard>
         </div>
-        <span style={{ alignSelf: 'flex-end', justifySelf: 'end' }}>More</span>
+        <span className="More">More</span>
       </div>
     )
   }

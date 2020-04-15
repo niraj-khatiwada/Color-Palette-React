@@ -11,4 +11,25 @@ span {
   font-size: 80%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   opacity: 0.8;
+  align-self: flex-end;
+  overflow: hidden;
+}
+
+.true {
+  transform: scale(10);
+  transition: all 0.2s linear;
+  z-index: 10;
+}
+
+.ColorName {
+  justify-self: start;
+}
+.More {
+  justify-self: flex-end;
+}
+
+.true:hover .copyBtn,
+.true:hover .More,
+.true:hover .ColorName {
+  display: none;
 }
