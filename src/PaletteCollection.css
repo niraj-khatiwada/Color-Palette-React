@@ -1,0 +1,10 @@
+.paletteBrief {
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
+  align-items: center;
+}
+
+.card {
+  margin: 1rem;
+}
