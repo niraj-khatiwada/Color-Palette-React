@@ -33,7 +33,7 @@ export default class NavBar extends Component {
         </div>
         <div className="convert">
           <Select value={this.state.format} onChange={this.handleSelectChange}>
-            <MenuItem value="hex">Hex #fff</MenuItem>
+            <MenuItem value="hex">Hexadecimal #fff</MenuItem>
             <MenuItem value="rgb">RGB (255, 255, 255)</MenuItem>
             <MenuItem value="rgba">RGBA (255, 255, 255, 1)</MenuItem>
           </Select>

@@ -26,6 +26,9 @@ class Palette extends Component {
   }
   handleSelectChange(value) {
     this.setState({ colorFormat: value, open: true })
+    setTimeout(() => {
+      this.setState({ open: false })
+    }, 3000)
   }
   handleSnackBarClose() {
     this.setState({ open: false })
@@ -33,7 +36,9 @@ class Palette extends Component {
   render() {
     const colorArray = this.props.palette.colors[
       this.state.sliderValue
-    ].map((color) => <Color backgroundColor={color[this.state.colorFormat]} />)
+    ].map((color) => (
+      <Color backgroundColor={color[this.state.colorFormat]} key={color.id} />
+    ))
     return (
       <div className="Palette container-fluid" style={{ height: '100%' }}>
         <NavBar
@@ -41,16 +46,18 @@ class Palette extends Component {
           handleChange={this.handleChange}
           handleSelectChange={this.handleSelectChange}
         />
-        <div className="Palette-row row" style={{ height: '90%' }}>
-          {colorArray}
+        <div className="Palette-row row">{colorArray}</div>
+        <div className="footer">
+          <h5>
+            {this.props.palette.emoji} {this.props.palette.paletteName}
+          </h5>
         </div>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'right',
           }}
           open={this.state.open}
-          autoHideDuration={6000}
           message={`Changed to ${this.state.colorFormat.toUpperCase()} format`}
           action={
             <IconButton

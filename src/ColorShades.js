@@ -20,7 +20,7 @@ function colorShades(starterPalette) {
         id: `${color.name}`.toLowerCase().replace(/ /g, '-'),
         hex: shadesResult[shade],
         rgb: chroma(shadesResult[shade]).css(),
-        rgba: chroma(chroma(shadesResult[shade]).name()).alpha(0.9).css(),
+        rgba: chroma(chroma(shadesResult[shade]).name()).alpha(0.999999).css(),
       })
     }
   }

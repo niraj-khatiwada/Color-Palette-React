@@ -23,5 +23,21 @@
 .convert {
   align-self: center;
   padding: 1rem;
-  width: 10rem;
+  width: 15rem;
+}
+
+.Palette-row {
+  height: 86%;
+ 
+}
+
+.footer {
+  display: flex;
+  height: 4%;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+.footer h5 {
+  font-size: 1rem;
 }

@@ -30,7 +30,6 @@ export default class Color extends Component {
           padding: '0.1rem',
         }}
       >
-        {' '}
         <div className="Copied">
           <h1>Copied:{this.props.backgroundColor}</h1>
         </div>
