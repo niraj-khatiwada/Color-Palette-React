@@ -2,19 +2,18 @@
   width: 30%;
   display: flex;
   align-items: flex-end;
-  padding: 1rem;
 }
 .navBar {
   height: 10%;
   background-color: #f4f4f4;
   display: flex;
   justify-content: space-between;
+  padding: 1rem;
 }
 
 .title {
   display: flex;
   align-items: flex-end;
-  padding: 1rem;
   font-size: 1.8rem;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -22,13 +21,11 @@
 
 .convert {
   align-self: center;
-  padding: 1rem;
   width: 15rem;
 }
 
 .Palette-row {
   height: 86%;
- 
 }
 
 .footer {

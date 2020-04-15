@@ -21,9 +21,9 @@ export default class NavBar extends Component {
       <nav className="navBar row">
         <div className="title">Color Shades</div>
         <div className="slider">
-          <h6>Change level</h6>
+          <h6 style={{ marginRight: '1rem' }}>Level </h6>
           <Slider
-            defaultValue={this.props.sliderValue}
+            defaultValue={900}
             min={100}
             step={100}
             max={900}
