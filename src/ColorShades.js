@@ -1,31 +1,4 @@
-// {
-//     paletteName: 'Material UI Colors',
-//     id: 'material-ui-colors',
-//     emoji: '🎨',
-//     colors: [
-//       { name: 'red', color: '#F44336' },
-//       { name: 'pink', color: '#E91E63' },
-//       { name: 'purple', color: '#9C27B0' },
-//       { name: 'deeppurple', color: '#673AB7' },
-//       { name: 'indigo', color: '#3F51B5' },
-//       { name: 'blue', color: '#2196F3' },
-//       { name: 'lightblue', color: '#03A9F4' },
-//       { name: 'cyan', color: '#00BCD4' },
-//       { name: 'teal', color: '#009688' },
-//       { name: 'green', color: '#4CAF50' },
-//       { name: 'lightgreen', color: '#8BC34A' },
-//       { name: 'lime', color: '#CDDC39' },
-//       { name: 'yellow', color: '#FFEB3B' },
-//       { name: 'amber', color: '#FFC107' },
-//       { name: 'orange', color: '#FF9800' },
-//       { name: 'deeporange', color: '#FF5722' },
-//       { name: 'brown', color: '#795548' },
-//       { name: 'grey', color: '#9E9E9E' },
-//       { name: 'bluegrey', color: '#607D8B' },
-//     ],
-//   },
-
-import { chroma } from 'chroma-js'
+import chroma from 'chroma-js'
 
 let levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
 
@@ -39,26 +12,29 @@ function colorShades(starterPalette) {
   for (let l of levels) {
     newshadesPalette.colors[l] = []
   }
-  for (let color of newshadesPalette.colors){
-    let shadesResult = generateColorShades(color.color,10).reverse()
-    for (let shade in shadesResult){
-        color[shade].push({
-            shadeName:`${color.name}-${levels[shade]}`,
-            id: `${color.name}`.toLowerCase().replace(/ /g, "-"),
-            hex: shadesResult[shade],
-            rgb: chroma(shadesResult[shade]).css()
-
-
-        })
+  for (let color of starterPalette.colors) {
+    let shadesResult = generateColorShades(color.color, 10).reverse()
+    for (let shade in shadesResult) {
+      newshadesPalette.colors[levels[shade]].push({
+        shadeName: `${color.name}-${levels[shade]}`,
+        id: `${color.name}`.toLowerCase().replace(/ /g, '-'),
+        hex: shadesResult[shade],
+        rgb: chroma(shadesResult[shade]).css(),
+        rgba: chroma(chroma(shadesResult[shade]).name()).alpha(0.9).css(),
+      })
     }
   }
-  return shadesResult
+  return newshadesPalette
 }
 
-generateShadesRange(hexColor){
-    return [chroma(hexColor).darken(1.4).hex(),  "#fff"]
+function generateShadesRange(hexColor) {
+  return [chroma(hexColor).darken(1.4).hex(), '#fff']
 }
-function generateColorShades(hexColor, numColor){
-    return chroma.scale(generateShadesRange(hexColor)).mode('lch').colors(numColor)
+function generateColorShades(hexColor, numColor) {
+  return chroma
+    .scale(generateShadesRange(hexColor))
+    .mode('lch')
+    .colors(numColor)
+}
 
-}
+export { colorShades }

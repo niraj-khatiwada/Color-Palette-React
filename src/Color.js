@@ -23,7 +23,7 @@ export default class Color extends Component {
       <div
         className={`Color ${this.state.copied}`}
         style={{
-          background: this.props.backgroundColor.color,
+          background: this.props.backgroundColor.hex,
           width: '20%',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr',
@@ -32,14 +32,14 @@ export default class Color extends Component {
       >
         {' '}
         <div className="Copied">
-          <h1>Copied:{this.props.backgroundColor.color}</h1>
+          <h1>Copied:{this.props.backgroundColor.hex}</h1>
         </div>
         <span className="ColorName">
-          {this.props.backgroundColor.name.toUpperCase()}
+          {this.props.backgroundColor.shadeName}
         </span>
         <div style={{ alignSelf: 'center', justifySelf: 'center' }}>
           <CopyToClipboard
-            text={this.props.backgroundColor.color}
+            text={this.props.backgroundColor.hex}
             onCopy={this.handleCopy}
           >
             <button className="copyBtn btn btn-light">Copy</button>
