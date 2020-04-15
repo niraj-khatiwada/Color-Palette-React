@@ -2,6 +2,9 @@
   visibility: hidden;
 }
 
+.Color {
+  position: relative;
+}
 .Color:hover .copyBtn {
   visibility: visible;
 }
@@ -32,4 +35,23 @@ span {
 .true:hover .More,
 .true:hover .ColorName {
   display: none;
+}
+
+.Copied {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Copied h1 {
+  font-size: 2.5px;
+}
+
+@media screen and (max-width: 992px) {
+  .Copied h1 {
+    font-size: 1.5px;
+  }
 }

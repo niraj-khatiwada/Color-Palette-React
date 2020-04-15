@@ -30,6 +30,10 @@ export default class Color extends Component {
           padding: '0.1rem',
         }}
       >
+        {' '}
+        <div className="Copied">
+          <h1>Copied:{this.props.backgroundColor.color}</h1>
+        </div>
         <span className="ColorName">
           {this.props.backgroundColor.name.toUpperCase()}
         </span>
