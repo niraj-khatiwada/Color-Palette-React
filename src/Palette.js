@@ -3,47 +3,66 @@ import Color from './Color'
 
 import './Palette.css'
 
-import { withStyles } from '@material-ui/core/styles'
-import Slider from '@material-ui/core/Slider'
+import Snackbar from '@material-ui/core/Snackbar'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 
-import { NavLink } from 'react-router-dom'
-import { Typography } from '@material-ui/core'
+import NavBar from './NavBar'
 
 class Palette extends Component {
   constructor(props) {
     super(props)
     this.state = {
       sliderValue: 900,
+      colorFormat: 'hex',
+      open: false,
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.handleSnackBarClose = this.handleSnackBarClose.bind(this)
   }
   handleChange(evt, sliderValue) {
     this.setState({ sliderValue })
   }
+  handleSelectChange(value) {
+    this.setState({ colorFormat: value, open: true })
+  }
+  handleSnackBarClose() {
+    this.setState({ open: false })
+  }
   render() {
     const colorArray = this.props.palette.colors[
       this.state.sliderValue
-    ].map((color) => <Color backgroundColor={color} />)
+    ].map((color) => <Color backgroundColor={color[this.state.colorFormat]} />)
     return (
       <div className="Palette container-fluid" style={{ height: '100%' }}>
-        <nav className="navBar row">
-          <div className="title">Color Shades</div>
-          <div className="slider">
-            <Slider
-              defaultValue={this.state.sliderValue}
-              min={100}
-              step={100}
-              max={900}
-              onChange={this.handleChange}
-              valueLabelDisplay="on"
-            />
-          </div>
-          <div className="covertCode"></div>
-        </nav>
+        <NavBar
+          sliderValue={this.state.sliderValue}
+          handleChange={this.handleChange}
+          handleSelectChange={this.handleSelectChange}
+        />
         <div className="Palette-row row" style={{ height: '90%' }}>
           {colorArray}
         </div>
-        {/* Footer */}
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          message={`Changed to ${this.state.colorFormat.toUpperCase()} format`}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={this.handleSnackBarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
+        />
       </div>
     )
   }
