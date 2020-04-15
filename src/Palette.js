@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import Color from './Color'
 
-import { withStyles } from '@material-ui/styles'
-import Slider from '@material-ui/core/Slider';
+import './Palette.css'
 
+import { withStyles } from '@material-ui/core/styles'
+import Slider from '@material-ui/core/Slider'
 
+import { NavLink } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
 
 class Palette extends Component {
   constructor(props) {
@@ -14,9 +17,8 @@ class Palette extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
   }
-  handleChange(evt) {
-    this.setState({ sliderValue: evt.target.value })
-    console.log(this.state)
+  handleChange(evt, sliderValue) {
+    this.setState({ sliderValue })
   }
   render() {
     const colorArray = this.props.palette.colors[
@@ -24,24 +26,19 @@ class Palette extends Component {
     ].map((color) => <Color backgroundColor={color} />)
     return (
       <div className="Palette container-fluid" style={{ height: '100%' }}>
-        <nav>
-        <Slider
-        defaultValue={80}
-        // getAriaValueText=
-        aria-labelledby="discrete-slider-always"
-        step={10}
-        // marks={}
-        valueLabelDisplay="on"
-      />
-          <input
-            className="slider"
-            type="range"
-            min="100"
-            max="900"
-            step="100"
-            value={this.state.sliderValue}
-            onChange={this.handleChange}
-          />
+        <nav className="navBar row">
+          <div className="title">Color Shades</div>
+          <div className="slider">
+            <Slider
+              defaultValue={this.state.sliderValue}
+              min={100}
+              step={100}
+              max={900}
+              onChange={this.handleChange}
+              valueLabelDisplay="on"
+            />
+          </div>
+          <div className="covertCode"></div>
         </nav>
         <div className="Palette-row row" style={{ height: '90%' }}>
           {colorArray}

@@ -9,7 +9,8 @@
   visibility: visible;
 }
 
-span {
+.ColorName,
+.More {
   padding: 5px;
   font-size: 80%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Palette palette={colorShades(DefaultColorPalette[2])} />
+        <Palette palette={colorShades(DefaultColorPalette[5])} />
       </div>
     )
   }
