@@ -2,20 +2,27 @@ import React, { Component } from 'react'
 
 import './PaletteCollection.css'
 
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
+import { Link } from 'react-router-dom'
 
 export default class PaletteCollection extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
+    const styles = {
+      card: {
+        margin: '1rem',
+      },
+    }
     const palette = this.props.paletteArray.map((palette) => {
       return (
-        <div className="card col-md-3">
+        <div key={palette.id} className={`card col-md-3`}>
           <div className="card-body cardBody">
             <div className="paletteColors row">
               {palette.colors.map((color) => {
                 return (
                   <div
+                    key={`${color.name}`}
                     className="eachColor col-sm-3"
                     style={{
                       backgroundColor: color.color,
@@ -26,10 +33,15 @@ export default class PaletteCollection extends Component {
                 )
               })}
             </div>
-            <div className="paletteBrief">
-              <span className="card-text">{palette.paletteName}</span>
-              <span className="card-text">{palette.emoji}</span>
-            </div>
+            <Link
+              to={`/palette/${palette.id}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="paletteBrief">
+                <span className="card-text">{palette.paletteName}</span>
+                <span className="card-text">{palette.emoji}</span>
+              </div>
+            </Link>
           </div>
         </div>
       )
