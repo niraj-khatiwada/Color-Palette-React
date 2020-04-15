@@ -7,7 +7,7 @@ import Palette from './Palette'
 function App() {
   return (
     <div className="App">
-      <Palette palette={DefaultColorPalette} />
+      <Palette palette={DefaultColorPalette[2]} />
     </div>
   )
 }

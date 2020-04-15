@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
+import Color from './Color'
+
+import { withStyles } from '@material-ui/styles'
 
 class Palette extends Component {
   render() {
-    const paletteArray = this.props.palette.map((palette) =>
-      palette.colors.map((color) => (
-        <div
-          style={{
-            backgroundColor: color.color,
-            width: '200px',
-            height: '200px',
-          }}
-        ></div>
-      ))
+    const colorArray = this.props.palette.colors.map((color) => (
+      <Color backgroundColor={color} />
+    ))
+    return (
+      <div className="Palette container-fluid" style={{ height: '100%' }}>
+        {/* Nav */}
+        <div className="Palette-row row" style={{ height: '90%' }}>
+          {colorArray}
+        </div>
+        {/* Footer */}
+      </div>
     )
-    return <div className="Palette">{paletteArray}</div>
   }
 }
 

@@ -1,0 +1,14 @@
+.copyBtn {
+  visibility: hidden;
+}
+
+.Color:hover .copyBtn {
+  visibility: visible;
+}
+
+span {
+  padding: 5px;
+  font-size: 80%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  opacity: 0.8;
+}
