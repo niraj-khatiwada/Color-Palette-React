@@ -18,6 +18,7 @@ const styles = {
     background: `url(${DiamondSunset})center/cover scroll no-repeat`,
     height: '100vh',
     overflow: 'scroll',
+    overflowX: 'hidden',
   },
 }
 

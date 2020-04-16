@@ -50,7 +50,6 @@ class More extends Component {
       )
     }
     const shades = allColor.map((color) => {
-      console.log(color)
       return (
         <Color
           color={color}
@@ -61,12 +60,12 @@ class More extends Component {
       )
     })
     return (
-      <div className={`${this.props.classes.More} container-fluid`}>
+      <div className={`${this.props.classes.More} container-fluid p-0`}>
         <NavBar
           handleTitleClick={() => this.props.routeProps.history.push('/')}
           handleSelectChange={this.handleSelectChange}
         />
-        <div className={`${this.props.classes.allShades} row`}>{shades}</div>
+        <div className={`${this.props.classes.allShades} Palette-row`}>{shades}</div>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',

@@ -57,7 +57,7 @@ class Palette extends Component {
       />
     ))
     return (
-      <div className="Palette container-fluid" style={{ height: '100%' }}>
+      <div className="Palette container-fluid p-0" style={{ height: '100%' }}>
         <NavBar
           sliderValue={this.state.sliderValue}
           handleChange={this.handleChange}
@@ -65,11 +65,13 @@ class Palette extends Component {
           handleTitleClick={this.handleTitleClick}
           slider={true}
         />
-        <div className="Palette-row row">{colorArray}</div>
-        <div className="footer p-2">
-          <h5>
-            {this.props.palette.emoji} {this.props.palette.paletteName}
-          </h5>
+        <div className="Palette-row">{colorArray}</div>
+        <div className="row">
+          <div className="footer">
+            <h5>
+              {this.props.palette.emoji} {this.props.palette.paletteName}
+            </h5>
+          </div>
         </div>
         <Snackbar
           anchorOrigin={{

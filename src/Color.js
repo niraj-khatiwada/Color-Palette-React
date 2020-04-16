@@ -38,10 +38,6 @@ class Color extends Component {
         className={`Color ${this.state.copied}`}
         style={{
           background: this.props.backgroundColor,
-          width: '20%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          padding: '0.1rem',
         }}
       >
         <div className="Copied">

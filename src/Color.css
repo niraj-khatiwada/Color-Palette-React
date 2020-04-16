@@ -4,6 +4,9 @@
 
 .Color {
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.3rem;
 }
 .Color:hover .copyBtn {
   visibility: visible;
