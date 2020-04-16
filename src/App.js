@@ -2,25 +2,42 @@ import React, { Component } from 'react'
 
 import { Route, Switch } from 'react-router-dom'
 
-import './App.css'
 import Palette from './Palette'
 import { colorShades } from './ColorShades'
 import DefaultColorPalette from './DefaultColorPalette'
 import PaletteCollection from './PaletteCollection'
 
+import { withStyles } from '@material-ui/styles'
+
+const styles = {
+  App: {
+    background:
+      "url('https://wallpapershome.com/images/pages/pic_h/21288.jpg')center/cover fixed no-repeat",
+    height: '100vh',
+  },
+}
+
 class App extends Component {
   findPalette(id) {
     return DefaultColorPalette.find((palette) => palette.id === id)
   }
+  handleCardClick(routeprops, id) {
+    routeprops.history.push(`palette/${id}`)
+  }
   render() {
     return (
-      <div className="App">
+      <div className={this.props.classes.App}>
         <Switch>
           <Route
             exact
             path="/"
-            render={() => {
-              return <PaletteCollection paletteArray={DefaultColorPalette} />
+            render={(routeProps) => {
+              return (
+                <PaletteCollection
+                  paletteArray={DefaultColorPalette}
+                  handleCardClick={this.handleCardClick.bind(this, routeProps)}
+                />
+              )
             }}
           />
           <Route
@@ -41,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withStyles(styles)(App)

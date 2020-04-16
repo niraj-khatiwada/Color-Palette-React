@@ -1,23 +1,50 @@
 import React, { Component } from 'react'
 
-import './PaletteCollection.css'
+import { withStyles } from '@material-ui/styles'
 
 import { Link } from 'react-router-dom'
 
-export default class PaletteCollection extends Component {
-  constructor(props) {
-    super(props)
+const styles = {
+  paletteBrief: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '2rem',
+    alignItems: 'center',
+    color: 'black',
+    font: '',
+    fontFamily:
+      "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
+  },
+  card: {
+    margin: '1rem',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+
+  navBar: {
+    '& h3': {
+      color: 'white',
+      fontFamily:
+        "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
+    },
+  },
+}
+
+class PaletteCollection extends Component {
+  handleCardClick(id) {
+    this.props.handleCardClick(id)
   }
   render() {
-    const styles = {
-      card: {
-        margin: '1rem',
-      },
-    }
+    const { classes } = this.props
     const palette = this.props.paletteArray.map((palette) => {
       return (
-        <div key={palette.id} className={`card col-md-3`}>
-          <div className="card-body cardBody">
+        <div
+          key={palette.id}
+          className={`${classes.card} card col-md-3 p-0`}
+          onClick={this.handleCardClick.bind(this, palette.id)}
+        >
+          <div className="card-body cardBody py-1">
             <div className="paletteColors row">
               {palette.colors.map((color) => {
                 return (
@@ -26,30 +53,32 @@ export default class PaletteCollection extends Component {
                     className="eachColor col-sm-3"
                     style={{
                       backgroundColor: color.color,
-                      width: '3rem',
-                      height: '2.7rem',
+                      width: '2rem',
+                      height: '2.3rem',
                     }}
                   ></div>
                 )
               })}
             </div>
-            <Link
-              to={`/palette/${palette.id}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <div className="paletteBrief">
-                <span className="card-text">{palette.paletteName}</span>
-                <span className="card-text">{palette.emoji}</span>
-              </div>
-            </Link>
+            <div className={classes.paletteBrief}>
+              <span className="card-text">{palette.paletteName}</span>
+              <span className="card-text">{palette.emoji}</span>
+            </div>
           </div>
         </div>
       )
     })
     return (
-      <div className="container PaletteCollection ">
-        <div className="row justify-content-center">{palette}</div>
+      <div className="PaletteCollection">
+        <nav className={`container-fluid p-2 ${this.props.classes.navBar}`}>
+          <h3>React Colors</h3>
+        </nav>
+        <div className="container">
+          <div className="row justify-content-center">{palette}</div>
+        </div>
       </div>
     )
   }
 }
+
+export default withStyles(styles)(PaletteCollection)
