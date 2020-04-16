@@ -19,7 +19,9 @@ export default class Color extends Component {
       this.setState({ copied: false })
     }, 1000)
   }
-  handleMoreClick(color) {}
+  handleMoreClick() {
+    this.props.handleMoreClick(this.props)
+  }
   render() {
     return (
       <div
@@ -44,13 +46,15 @@ export default class Color extends Component {
             <button className="copyBtn btn btn-light">Copy</button>
           </CopyToClipboard>
         </div>
-        <button
-          className="More btn btn-dark"
-          style={{ padding: '0 0.2rem', opacity: '0.5', fontSize: '0.7rem' }}
-          onClick={this.handleMoreClick(this.props.color)}
-        >
-          More
-        </button>
+        {this.props.more === true ? (
+          <button
+            className="More btn btn-dark"
+            style={{ padding: '0 0.2rem', opacity: '0.5', fontSize: '0.7rem' }}
+            onClick={this.handleMoreClick}
+          >
+            More
+          </button>
+        ) : null}
       </div>
     )
   }

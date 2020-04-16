@@ -26,19 +26,12 @@ class App extends Component {
     defaultPalette: DefaultColorPalette,
   }
   findPalette(id) {
-    console.log(
-      colorShades(
-        this.state.defaultPalette.find((palette) => palette.id === id)
-      )
-    )
     return this.state.defaultPalette.find((palette) => palette.id === id)
   }
   handleCardClick(routeprops, id) {
     routeprops.history.push(`palette/${id}`)
   }
-  handleTitleClick(routeProps) {
-    routeProps.history.push('/')
-  }
+
   handleDelete(id) {
     this.setState({
       defaultPalette: DefaultColorPalette.filter((item) => item.id !== id),
@@ -77,7 +70,8 @@ class App extends Component {
                 palette={colorShades(
                   this.findPalette(routeProps.match.params.id)
                 )}
-                handleTitleClick={this.handleTitleClick.bind(this, routeProps)}
+                routeProps={routeProps}
+                more={true}
               />
             )}
           />
@@ -88,6 +82,7 @@ class App extends Component {
               <More
                 routeProps={routeProps}
                 allShades={this.findColor(routeProps)}
+                more={false}
               />
             )}
           />

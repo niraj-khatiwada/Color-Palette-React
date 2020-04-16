@@ -25,11 +25,18 @@ function More(props) {
     )
   }
   const shades = allColor.map((color) => {
-    return <Color color={color} backgroundColor={color.hex} />
+    return (
+      <Color
+        color={color}
+        backgroundColor={color.hex}
+        more={props.more}
+        key={`${color.id}${color.shadeName}`}
+      />
+    )
   })
   return (
     <div className={`${props.classes.More} container-fluid`}>
-      <NavBar />
+      <NavBar handleTitleClick={() => props.routeProps.history.push('/')} />
       <div className={`${props.classes.allShades} row`}>{shades}</div>
       <div className="footer"></div>
     </div>

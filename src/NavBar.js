@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/styles'
 const styles = {
   title: {
     cursor: 'pointer',
-    fontSize:"2rem"
+    fontSize: '2rem',
   },
 }
 
@@ -34,17 +34,19 @@ class NavBar extends Component {
         >
           Color Shades
         </div>
-        <div className="slider">
-          <h6 style={{ marginRight: '1rem' }}>Level </h6>
-          <Slider
-            defaultValue={900}
-            min={100}
-            step={100}
-            max={900}
-            onChange={this.props.handleChange}
-            valueLabelDisplay="on"
-          />
-        </div>
+        {this.props.slider ? (
+          <div className="slider">
+            <h6 style={{ marginRight: '1rem' }}>Level </h6>
+            <Slider
+              defaultValue={900}
+              min={100}
+              step={100}
+              max={900}
+              onChange={this.props.handleChange}
+              valueLabelDisplay="on"
+            />
+          </div>
+        ) : null}
         <div className="convert">
           <Select value={this.state.format} onChange={this.handleSelectChange}>
             <MenuItem value="hex">Hexadecimal #fff</MenuItem>

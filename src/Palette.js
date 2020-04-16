@@ -20,6 +20,8 @@ class Palette extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleSnackBarClose = this.handleSnackBarClose.bind(this)
+    this.handleMoreClick = this.handleMoreClick.bind(this)
+    this.handleTitleClick = this.handleTitleClick.bind(this)
   }
   handleChange(evt, sliderValue) {
     this.setState({ sliderValue })
@@ -33,6 +35,15 @@ class Palette extends Component {
   handleSnackBarClose() {
     this.setState({ open: false })
   }
+  handleMoreClick(color) {
+    this.props.routeProps.history.push(
+      `/palette/${this.props.routeProps.match.params.id}/${color.color.id}`
+    )
+  }
+  handleTitleClick() {
+    console.log('Clicked')
+    this.props.routeProps.history.push('/')
+  }
   render() {
     const colorArray = this.props.palette.colors[
       this.state.sliderValue
@@ -41,6 +52,8 @@ class Palette extends Component {
         backgroundColor={color[this.state.colorFormat]}
         color={color}
         key={color.id}
+        handleMoreClick={this.handleMoreClick}
+        more={this.props.more}
       />
     ))
     return (
@@ -49,7 +62,9 @@ class Palette extends Component {
           sliderValue={this.state.sliderValue}
           handleChange={this.handleChange}
           handleSelectChange={this.handleSelectChange}
-          handleTitleClick={() => this.props.handleTitleClick()}
+          handleTitleClick={this.handleTitleClick}
+          slider={true}
+
         />
         <div className="Palette-row row">{colorArray}</div>
         <div className="footer p-2">
