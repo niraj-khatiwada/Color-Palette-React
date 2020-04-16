@@ -4,7 +4,16 @@ import Slider from '@material-ui/core/Slider'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
-export default class NavBar extends Component {
+import { withStyles } from '@material-ui/styles'
+
+const styles = {
+  title: {
+    cursor: 'pointer',
+    fontSize:"2rem"
+  },
+}
+
+class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +28,12 @@ export default class NavBar extends Component {
   render() {
     return (
       <nav className="navBar row">
-        <div className="title">Color Shades</div>
+        <div
+          className={this.props.classes.title}
+          onClick={() => this.props.handleTitleClick()}
+        >
+          Color Shades
+        </div>
         <div className="slider">
           <h6 style={{ marginRight: '1rem' }}>Level </h6>
           <Slider
@@ -42,3 +56,5 @@ export default class NavBar extends Component {
     )
   }
 }
+
+export default withStyles(styles)(NavBar)

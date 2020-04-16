@@ -9,20 +9,34 @@ import PaletteCollection from './PaletteCollection'
 
 import { withStyles } from '@material-ui/styles'
 
+import DiamondSunset from './DiamondSunset.svg'
+
 const styles = {
   App: {
-    background:
-      "url('https://wallpapershome.com/images/pages/pic_h/21288.jpg')center/cover fixed no-repeat",
+    backgroundColor: '#c691ff',
+    background: `url(${DiamondSunset})center/cover scroll no-repeat`,
     height: '100vh',
+    overflow: 'scroll',
   },
 }
 
 class App extends Component {
+  state = {
+    defaultPalette: DefaultColorPalette,
+  }
   findPalette(id) {
-    return DefaultColorPalette.find((palette) => palette.id === id)
+    return this.state.defaultPalette.find((palette) => palette.id === id)
   }
   handleCardClick(routeprops, id) {
     routeprops.history.push(`palette/${id}`)
+  }
+  handleTitleClick(routeProps) {
+    routeProps.history.push('/')
+  }
+  handleDelete(id) {
+    this.setState({
+      defaultPalette: DefaultColorPalette.filter((item) => item.id !== id),
+    })
   }
   render() {
     return (
@@ -30,12 +44,13 @@ class App extends Component {
         <Switch>
           <Route
             exact
-            path="/"
+            path="(/|/palette)"
             render={(routeProps) => {
               return (
                 <PaletteCollection
-                  paletteArray={DefaultColorPalette}
+                  paletteArray={this.state.defaultPalette}
                   handleCardClick={this.handleCardClick.bind(this, routeProps)}
+                  handleDelete={this.handleDelete.bind(this)}
                 />
               )
             }}
@@ -48,6 +63,7 @@ class App extends Component {
                 palette={colorShades(
                   this.findPalette(routeProps.match.params.id)
                 )}
+                handleTitleClick={this.handleTitleClick.bind(this, routeProps)}
               />
             )}
           />

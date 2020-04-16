@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/styles'
-
-import { Link } from 'react-router-dom'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const styles = {
   paletteBrief: {
@@ -11,7 +10,6 @@ const styles = {
     height: '2rem',
     alignItems: 'center',
     color: 'black',
-    font: '',
     fontFamily:
       "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
   },
@@ -19,6 +17,10 @@ const styles = {
     margin: '1rem',
     '&:hover': {
       cursor: 'pointer',
+    },
+    '&:hover svg': {
+      visibility: 'visible',
+      cursor: 'default',
     },
   },
 
@@ -29,11 +31,27 @@ const styles = {
         "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
     },
   },
+  deleteIcon: {
+    position: 'absolute',
+    zIndex: '1',
+    right: '0.3rem',
+    backgroundColor: 'red',
+    padding: '0.5rem 0.6rem',
+    visibility: 'hidden',
+    fontSize: '2.5rem',
+  },
+  cardBody: {
+    position: 'relative',
+  },
 }
 
 class PaletteCollection extends Component {
   handleCardClick(id) {
     this.props.handleCardClick(id)
+  }
+  handleDelete(id, evt) {
+    evt.stopPropagation()
+    this.props.handleDelete(id)
   }
   render() {
     const { classes } = this.props
@@ -44,7 +62,12 @@ class PaletteCollection extends Component {
           className={`${classes.card} card col-md-3 p-0`}
           onClick={this.handleCardClick.bind(this, palette.id)}
         >
-          <div className="card-body cardBody py-1">
+          <div className={`card-body ${classes.cardBody} py-1`}>
+            <DeleteIcon
+              color="alert"
+              className={classes.deleteIcon}
+              onClick={this.handleDelete.bind(this, palette.id)}
+            ></DeleteIcon>{' '}
             <div className="paletteColors row">
               {palette.colors.map((color) => {
                 return (

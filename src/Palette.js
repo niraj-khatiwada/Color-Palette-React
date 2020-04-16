@@ -45,9 +45,10 @@ class Palette extends Component {
           sliderValue={this.state.sliderValue}
           handleChange={this.handleChange}
           handleSelectChange={this.handleSelectChange}
+          handleTitleClick={() => this.props.handleTitleClick()}
         />
         <div className="Palette-row row">{colorArray}</div>
-        <div className="footer">
+        <div className="footer p-2">
           <h5>
             {this.props.palette.emoji} {this.props.palette.paletteName}
           </h5>
