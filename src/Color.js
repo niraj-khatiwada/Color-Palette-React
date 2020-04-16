@@ -2,10 +2,18 @@ import React, { Component } from 'react'
 import './Color.css'
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { withStyles } from '@material-ui/styles'
 
 import chroma from 'chroma-js'
 
-export default class Color extends Component {
+const styles = {
+  ColorName: {
+    color: (props) =>
+      chroma(props.backgroundColor).luminance() < 0.15 ? 'white' : 'black',
+  },
+}
+
+class Color extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,8 +33,6 @@ export default class Color extends Component {
     this.props.handleMoreClick(this.props)
   }
   render() {
-    let chromaTrue =
-      chroma(this.props.backgroundColor).luminance() < 0.15 ? 'chromaTrue' : null
     return (
       <div
         className={`Color ${this.state.copied}`}
@@ -39,9 +45,11 @@ export default class Color extends Component {
         }}
       >
         <div className="Copied">
-          <h1>Copied:{this.props.backgroundColor}</h1>
+          <h1 className={this.props.classes.ColorName}>
+            Copied:{this.props.backgroundColor}
+          </h1>
         </div>
-        <span className={`ColorName ${chromaTrue}`}>
+        <span className={`${this.props.classes.ColorName} ColorName`}>
           {this.props.color.shadeName}
         </span>
         <div style={{ alignSelf: 'center', justifySelf: 'center' }}>
@@ -65,3 +73,5 @@ export default class Color extends Component {
     )
   }
 }
+
+export default withStyles(styles)(Color)

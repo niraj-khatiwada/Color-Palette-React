@@ -64,7 +64,6 @@ class Palette extends Component {
           handleSelectChange={this.handleSelectChange}
           handleTitleClick={this.handleTitleClick}
           slider={true}
-
         />
         <div className="Palette-row row">{colorArray}</div>
         <div className="footer p-2">
