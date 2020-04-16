@@ -10,6 +10,7 @@ import PaletteCollection from './PaletteCollection'
 import { withStyles } from '@material-ui/styles'
 
 import DiamondSunset from './DiamondSunset.svg'
+import More from './More'
 
 const styles = {
   App: {
@@ -25,6 +26,11 @@ class App extends Component {
     defaultPalette: DefaultColorPalette,
   }
   findPalette(id) {
+    console.log(
+      colorShades(
+        this.state.defaultPalette.find((palette) => palette.id === id)
+      )
+    )
     return this.state.defaultPalette.find((palette) => palette.id === id)
   }
   handleCardClick(routeprops, id) {
@@ -37,6 +43,14 @@ class App extends Component {
     this.setState({
       defaultPalette: DefaultColorPalette.filter((item) => item.id !== id),
     })
+  }
+  findColor(routeProps) {
+    const selectedPalete = colorShades(
+      this.state.defaultPalette.find((palette) => {
+        return palette.id === routeProps.match.params.id
+      })
+    )
+    return selectedPalete.colors
   }
   render() {
     return (
@@ -64,6 +78,16 @@ class App extends Component {
                   this.findPalette(routeProps.match.params.id)
                 )}
                 handleTitleClick={this.handleTitleClick.bind(this, routeProps)}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/palette/:id/:colorName"
+            render={(routeProps) => (
+              <More
+                routeProps={routeProps}
+                allShades={this.findColor(routeProps)}
               />
             )}
           />

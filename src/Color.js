@@ -11,6 +11,7 @@ export default class Color extends Component {
       copied: false,
     }
     this.handleCopy = this.handleCopy.bind(this)
+    this.handleMoreClick = this.handleMoreClick.bind(this)
   }
   handleCopy() {
     this.setState({ copied: true })
@@ -18,6 +19,7 @@ export default class Color extends Component {
       this.setState({ copied: false })
     }, 1000)
   }
+  handleMoreClick(color) {}
   render() {
     return (
       <div
@@ -33,9 +35,7 @@ export default class Color extends Component {
         <div className="Copied">
           <h1>Copied:{this.props.backgroundColor}</h1>
         </div>
-        <span className="ColorName">
-          {this.props.backgroundColor.shadeName}
-        </span>
+        <span className="ColorName">{this.props.color.shadeName}</span>
         <div style={{ alignSelf: 'center', justifySelf: 'center' }}>
           <CopyToClipboard
             text={this.props.backgroundColor}
@@ -44,7 +44,13 @@ export default class Color extends Component {
             <button className="copyBtn btn btn-light">Copy</button>
           </CopyToClipboard>
         </div>
-        <span className="More">More</span>
+        <button
+          className="More btn btn-dark"
+          style={{ padding: '0 0.2rem', opacity: '0.5', fontSize: '0.7rem' }}
+          onClick={this.handleMoreClick(this.props.color)}
+        >
+          More
+        </button>
       </div>
     )
   }

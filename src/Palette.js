@@ -37,7 +37,11 @@ class Palette extends Component {
     const colorArray = this.props.palette.colors[
       this.state.sliderValue
     ].map((color) => (
-      <Color backgroundColor={color[this.state.colorFormat]} key={color.id} />
+      <Color
+        backgroundColor={color[this.state.colorFormat]}
+        color={color}
+        key={color.id}
+      />
     ))
     return (
       <div className="Palette container-fluid" style={{ height: '100%' }}>
