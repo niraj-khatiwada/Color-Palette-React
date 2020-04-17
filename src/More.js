@@ -30,7 +30,6 @@ class More extends Component {
     this.handleSnackBarClose = this.handleSnackBarClose.bind(this)
   }
   handleSelectChange(value) {
-    console.log(value)
     this.setState({ colorFormat: value, open: true })
     setTimeout(() => {
       this.setState({ open: false })
@@ -65,7 +64,9 @@ class More extends Component {
           handleTitleClick={() => this.props.routeProps.history.push('/')}
           handleSelectChange={this.handleSelectChange}
         />
-        <div className={`${this.props.classes.allShades} Palette-row`}>{shades}</div>
+        <div className={`${this.props.classes.allShades} Palette-row`}>
+          {shades}
+        </div>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',

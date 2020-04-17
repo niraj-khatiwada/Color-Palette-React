@@ -55,15 +55,18 @@
   .Palette-row {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .slider {
-    display: none;
-  }
 }
 @media screen and (max-width: 576px) {
   .Palette-row {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, minmax(1fr, 1fr));
+  }
+  .navBar {
+    height: 20%;
+  }
+  .slider {
+    order: 10;
+    width: 98%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -71,10 +74,14 @@
     grid-template-columns: repeat(1, 1fr);
   }
   .navBar {
-    height: 15%;
+    height: 25%;
   }
   .convert {
     width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .slider {
     display: flex;
     justify-content: center;
   }
