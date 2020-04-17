@@ -13,7 +13,7 @@
 .convert {
   align-self: center;
   justify-self: flex-end;
-  width: 12rem;
+  padding: 1rem;
 }
 
 .Palette-row {
