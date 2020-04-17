@@ -1,6 +1,8 @@
 * {
-  box-sizing: border-box;
   scroll-behavior: smooth;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -10,10 +12,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+html {
+  overflow: scroll;
 }

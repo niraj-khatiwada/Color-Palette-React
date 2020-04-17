@@ -8,7 +8,10 @@ class MiniPalette extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={`${classes.card} card col-md-4 col-lg-3 col-sm-5 p-0`}>
+      <div
+        className={`${classes.card} card col-md-4 col-lg-3 col-sm-5 p-0`}
+        onClick={this.props.handleCardClick}
+      >
         <div className={`card-body ${classes.cardBody} py-1`}>
           <DeleteIcon
             className={classes.deleteIcon}

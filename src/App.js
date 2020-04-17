@@ -18,7 +18,6 @@ const styles = {
     background: `url(${DiamondSunset})center/cover scroll no-repeat`,
     height: '100vh',
     overflow: 'scroll',
-    overflowX: 'hidden',
   },
 }
 
@@ -35,7 +34,9 @@ class App extends Component {
 
   handleDelete(id) {
     this.setState({
-      defaultPalette: DefaultColorPalette.filter((item) => item.id !== id),
+      defaultPalette: this.state.defaultPalette.filter(
+        (item) => item.id !== id
+      ),
     })
   }
   findColor(routeProps) {

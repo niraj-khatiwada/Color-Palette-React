@@ -23,7 +23,7 @@ class PaletteCollection extends Component {
             key={palette.id}
             palette={palette}
             handleDelete={this.handleDelete.bind(this, palette.id)}
-            onClick={this.handleCardClick.bind(this, palette.id)}
+            handleCardClick={this.handleCardClick.bind(this, palette.id)}
           />
         </CSSTransition>
       )
@@ -34,7 +34,7 @@ class PaletteCollection extends Component {
           <h3>React Colors</h3>
         </nav>
         <div className="container">
-          <TransitionGroup className="row justify-content-center">
+          <TransitionGroup className="row justify-content-center m-0">
             {palette}
           </TransitionGroup>
         </div>

@@ -41,8 +41,7 @@ class Palette extends Component {
     )
   }
   handleTitleClick() {
-    console.log('Clicked')
-    this.props.routeProps.history.push('/')
+      this.props.routeProps.history.push('/')
   }
   render() {
     const colorArray = this.props.palette.colors[
@@ -66,12 +65,10 @@ class Palette extends Component {
           slider={true}
         />
         <div className="Palette-row">{colorArray}</div>
-        <div className="row">
-          <div className="footer">
-            <h5>
-              {this.props.palette.emoji} {this.props.palette.paletteName}
-            </h5>
-          </div>
+        <div className="footer">
+          <h5>
+            {this.props.palette.emoji} {this.props.palette.paletteName}
+          </h5>
         </div>
         <Snackbar
           anchorOrigin={{

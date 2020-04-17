@@ -5,7 +5,7 @@ export default {
     },
     '.fade-exit-active': {
       transform: 'scale(0)',
-      transition: 'transform 100ms linear',
+      transition: 'transform 200ms ease-in-out',
     },
   },
   paletteBrief: {

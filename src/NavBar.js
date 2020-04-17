@@ -27,7 +27,7 @@ class NavBar extends Component {
   }
   render() {
     return (
-      <nav className="navBar row">
+      <nav className="navBar row m-0">
         <div
           className={this.props.classes.title}
           onClick={() => this.props.handleTitleClick()}
