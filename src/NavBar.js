@@ -10,6 +10,10 @@ const styles = {
   title: {
     cursor: 'pointer',
     fontSize: '2rem',
+    alignSelf: 'center',
+    fontFamily: `'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif`,
+    padding: '0 1rem',
   },
 }
 
@@ -27,7 +31,7 @@ class NavBar extends Component {
   }
   render() {
     return (
-      <nav className="navBar row m-0">
+      <nav className="navBar">
         <div
           className={this.props.classes.title}
           onClick={() => this.props.handleTitleClick()}
@@ -46,7 +50,7 @@ class NavBar extends Component {
               valueLabelDisplay="on"
             />
           </div>
-        ) : null}
+        ) : (<div></div>)}
         <div className="convert">
           <Select value={this.state.format} onChange={this.handleSelectChange}>
             <MenuItem value="hex">Hexadecimal #fff</MenuItem>
