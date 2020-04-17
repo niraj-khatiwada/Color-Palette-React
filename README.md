@@ -1,4 +1,4 @@
-# Singke Page Color Palette React App
+# Single Page Color Palette React App
 
 [Demo](https://color-palette-react.netlify.app/)
 
