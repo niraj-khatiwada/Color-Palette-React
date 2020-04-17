@@ -15,7 +15,7 @@ class MiniPalette extends Component {
         <div className={`card-body ${classes.cardBody} py-1`}>
           <DeleteIcon
             className={classes.deleteIcon}
-            onClick={this.props.handleDelete}
+            onClick={this.props.openDialogue}
           ></DeleteIcon>{' '}
           <div className="paletteColors row">
             {this.props.palette.colors.map((color) => {
