@@ -6,8 +6,12 @@ import Palette from './Palette'
 import { colorShades } from './ColorShades'
 import DefaultColorPalette from './DefaultColorPalette'
 import PaletteCollection from './PaletteCollection'
+import Page from './Page'
 
 import { withStyles } from '@material-ui/styles'
+
+// Transitions
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import DiamondSunset from './DiamondSunset.svg'
 import More from './More'
@@ -15,9 +19,24 @@ import More from './More'
 const styles = {
   App: {
     backgroundColor: '#c691ff',
-    background: `url(${DiamondSunset})center/cover scroll no-repeat`,
+    background: `url(${DiamondSunset})center/cover fixed no-repeat`,
     height: '100vh',
-    overflow: 'scroll',
+  },
+  '@global': {
+    '.slide-exit': {
+      transform: 'translateX(0)',
+    },
+    '.slide-exit-active': {
+      transform: 'translateX(-1000vw)',
+      transition: 'transform 700ms ease-in-out',
+    },
+    '.slide-enter': {
+      opacity: 0,
+    },
+    '.slide-enter-active': {
+      opacity: 1,
+      transition: 'opacity 300ms ease-in-out',
+    },
   },
 }
 
@@ -49,48 +68,64 @@ class App extends Component {
   }
   render() {
     return (
-      <div className={this.props.classes.App}>
-        <Switch>
-          <Route
-            exact
-            path="(/|/palette)"
-            render={(routeProps) => {
-              return (
-                <PaletteCollection
-                  paletteArray={this.state.defaultPalette}
-                  handleCardClick={this.handleCardClick.bind(this, routeProps)}
-                  handleDelete={this.handleDelete.bind(this)}
+      <Route
+        render={({ location }) => (
+          <TransitionGroup className={this.props.classes.App}>
+            <CSSTransition key={location.key} classNames="slide" timeout={300}>
+              <Switch location={location}>
+                <Route
+                  exact
+                  path="(/|/palette)"
+                  render={(routeProps) => {
+                    return (
+                      <Page>
+                        <PaletteCollection
+                          paletteArray={this.state.defaultPalette}
+                          handleCardClick={this.handleCardClick.bind(
+                            this,
+                            routeProps
+                          )}
+                          handleDelete={this.handleDelete.bind(this)}
+                        />
+                      </Page>
+                    )
+                  }}
                 />
-              )
-            }}
-          />
-          <Route
-            exact
-            path="/palette/:id"
-            render={(routeProps) => (
-              <Palette
-                palette={colorShades(
-                  this.findPalette(routeProps.match.params.id)
-                )}
-                routeProps={routeProps}
-                more={true}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/palette/:id/:colorName"
-            render={(routeProps) => (
-              <More
-                routeProps={routeProps}
-                allShades={this.findColor(routeProps)}
-                more={false}
-              />
-            )}
-          />
-          <Route render={() => <h1>404 Error</h1>} />
-        </Switch>
-      </div>
+                <Route
+                  exact
+                  path="/palette/:id"
+                  render={(routeProps) => (
+                    <Page>
+                      <Palette
+                        palette={colorShades(
+                          this.findPalette(routeProps.match.params.id)
+                        )}
+                        routeProps={routeProps}
+                        more={true}
+                      />
+                    </Page>
+                  )}
+                />
+
+                <Route
+                  exact
+                  path="/palette/:id/:colorName"
+                  render={(routeProps) => (
+                    <Page>
+                      <More
+                        routeProps={routeProps}
+                        allShades={this.findColor(routeProps)}
+                        more={false}
+                      />
+                    </Page>
+                  )}
+                />
+                <Route render={() => <h1>404 Error</h1>} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      ></Route>
     )
   }
 }

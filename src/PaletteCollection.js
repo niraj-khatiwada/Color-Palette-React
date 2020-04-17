@@ -3,16 +3,43 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/styles'
 import MiniPalette from './MiniPalette'
 
+// Delete Confirm Dialog
+import Avatar from '@material-ui/core/Avatar'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItemText from '@material-ui/core/ListItemText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import ClearRoundedIcon from '@material-ui/icons/ClearRounded'
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
+
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import styles from './Styles/PaletteCollectionStyles'
 
 class PaletteCollection extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      id: '',
+    }
+    this.handleDelete = this.handleDelete.bind(this)
+    this.closeDialogue = this.closeDialogue.bind(this)
+  }
   handleCardClick(id) {
     this.props.handleCardClick(id)
   }
-  handleDelete(id, evt) {
+  handleDelete() {
+    this.props.handleDelete(this.state.id)
+    this.closeDialogue()
+  }
+  openDialogue(id, evt) {
     evt.stopPropagation()
-    this.props.handleDelete(id)
+    this.setState({ open: true, id: id })
+  }
+  closeDialogue() {
+    this.setState({ open: false, id: '' })
   }
   render() {
     const { classes } = this.props
@@ -22,8 +49,8 @@ class PaletteCollection extends Component {
           <MiniPalette
             key={palette.id}
             palette={palette}
-            handleDelete={this.handleDelete.bind(this, palette.id)}
             handleCardClick={this.handleCardClick.bind(this, palette.id)}
+            openDialogue={this.openDialogue.bind(this, palette.id)}
           />
         </CSSTransition>
       )
@@ -37,6 +64,31 @@ class PaletteCollection extends Component {
           <TransitionGroup className="row justify-content-center m-0">
             {palette}
           </TransitionGroup>
+          <Dialog
+            onClose={this.closeDialogue}
+            aria-labelledby="simple-dialog-title"
+            open={this.state.open}
+          >
+            <DialogTitle id="simple-dialog-title">Confirm Delete</DialogTitle>
+            <List>
+              <ListItem button onClick={this.handleDelete}>
+                <ListItemAvatar>
+                  <Avatar className={classes.deleteAvatar}>
+                    <DeleteRoundedIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={'Delete'} />
+              </ListItem>
+              <ListItem button onClick={this.closeDialogue}>
+                <ListItemAvatar>
+                  <Avatar className={classes.cancelAvatar}>
+                    <ClearRoundedIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={'Cancel'} />
+              </ListItem>
+            </List>
+          </Dialog>
         </div>
       </div>
     )
