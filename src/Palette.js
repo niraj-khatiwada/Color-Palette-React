@@ -16,6 +16,7 @@ class Palette extends Component {
       sliderValue: 900,
       colorFormat: 'hex',
       open: false,
+      navBarBackground: '',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
@@ -28,7 +29,8 @@ class Palette extends Component {
   }
   handleSelectChange(value) {
     this.setState({ colorFormat: value, open: true })
-    setTimeout(() => {
+    if (this.timerID) clearTimeout(this.timerID)
+    this.timerID = setTimeout(() => {
       this.setState({ open: false })
     }, 3000)
   }
@@ -41,7 +43,7 @@ class Palette extends Component {
     )
   }
   handleTitleClick() {
-      this.props.routeProps.history.push('/')
+    this.props.routeProps.history.push('/')
   }
   render() {
     const colorArray = this.props.palette.colors[
