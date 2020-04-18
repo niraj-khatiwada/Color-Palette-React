@@ -27,6 +27,9 @@ class PaletteCollection extends Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.closeDialogue = this.closeDialogue.bind(this)
   }
+  componentDidMount() {
+    document.title = 'React  Colors'
+  }
   handleCardClick(id) {
     this.props.handleCardClick(id)
   }

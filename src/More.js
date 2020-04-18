@@ -29,6 +29,9 @@ class More extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleSnackBarClose = this.handleSnackBarClose.bind(this)
   }
+  componentDidMount() {
+    document.title = this.props.routeProps.match.params.colorName.toUpperCase()
+  }
   handleSelectChange(value) {
     this.setState({ colorFormat: value, open: true })
     if (this.timerID) clearTimeout(this.timerID)

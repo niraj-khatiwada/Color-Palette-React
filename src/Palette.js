@@ -24,6 +24,9 @@ class Palette extends Component {
     this.handleMoreClick = this.handleMoreClick.bind(this)
     this.handleTitleClick = this.handleTitleClick.bind(this)
   }
+  componentDidMount() {
+    document.title = this.props.palette.paletteName
+  }
   handleChange(evt, sliderValue) {
     this.setState({ sliderValue })
   }
