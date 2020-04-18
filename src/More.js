@@ -31,7 +31,8 @@ class More extends Component {
   }
   handleSelectChange(value) {
     this.setState({ colorFormat: value, open: true })
-    setTimeout(() => {
+    if (this.timerID) clearTimeout(this.timerID)
+    this.timerID = setTimeout(() => {
       this.setState({ open: false })
     }, 3000)
   }
